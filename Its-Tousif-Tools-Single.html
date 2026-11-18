@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Its Tousif Tools - Image to 300 DPI, ChatGPT to PDF, WhatsApp Analyzer Free</title>
+<meta name="description" content="Its Tousif Tools: Convert images to 300 DPI for printing, export ChatGPT chats to beautiful PDF, analyze WhatsApp chats with charts. Fast, private, free, no watermark.">
+<meta name="keywords" content="image to 300 dpi converter, chatgpt to pdf, whatsapp chat analyzer, free online tools, Its Tousif Tools">
+<meta name="author" content="Its Tousif Tools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://itstousiftools.github.io/">
+<meta property="og:title" content="Its Tousif Tools - Powerful Media Tools Built for Speed">
+<meta property="og:description" content="3 premium tools in one page: 300 DPI converter, ChatGPT to PDF, WhatsApp analyzer. Lightning fast & private.">
+<meta property="og:image" content="https://itstousiftools.github.io/assets/og-image.png">
+<meta property="og:url" content="https://itstousiftools.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Its Tousif Tools - All Tools in One Page">
+<meta name="twitter:description" content="Convert, export, analyze - all tools in one premium page.">
+<meta name="twitter:image" content="https://itstousiftools.github.io/assets/og-image.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+
+/* Its Tousif Tools - Premium Dark SaaS Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{
+  --bg:#070708;
+  --card:rgba(255,255,255,0.04);
+  --card-border:rgba(255,255,255,0.08);
+  --card-hover-border:rgba(124,58,237,0.5);
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --purple:#7c3aed;
+  --blue:#3b82f6;
+  --cyan:#06b6d4;
+  --radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
+a{color:inherit;text-decoration:none}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+
+/* Gradient blobs */
+.bg-blobs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.blob{
+  position:absolute;
+  width:600px;height:600px;
+  filter:blur(120px);
+  opacity:0.35;
+  border-radius:50%;
+  transform:translateZ(0);
+  will-change:transform;
+}
+.blob.purple{background:radial-gradient(circle at 30% 30%, #7c3aed, #4c1d95);top:-100px;left:-100px;animation:float1 18s ease-in-out infinite}
+.blob.blue{background:radial-gradient(circle at 70% 70%, #3b82f6, #1e40af);top:20%;right:-150px;animation:float2 22s ease-in-out infinite}
+.blob.cyan{background:radial-gradient(circle at 50% 50%, #06b6d4, #0e7490);bottom:-150px;left:30%;animation:float3 20s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(60px,40px) scale(1.1)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,60px) scale(1.15)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-50px) scale(1.05)}}
+
+/* Header */
+.header{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:blur(20px);
+  background:rgba(7,7,8,0.7);
+  border-bottom:1px solid var(--card-border);
+}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;font-family:'Space Grotesk'}
+.logo-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--purple),var(--cyan));box-shadow:0 0 12px var(--purple)}
+.nav{display:flex;gap:28px;align-items:center}
+.nav a{color:var(--muted);font-size:14px;font-weight:500;transition:color .2s}
+.nav a:hover{color:var(--text)}
+.nav .btn{padding:10px 18px;border-radius:999px;background:linear-gradient(135deg,var(--purple),var(--blue));color:white;box-shadow:0 4px 20px rgba(124,58,237,0.35)}
+.search-box{position:relative}
+.search-box input{background:var(--card);border:1px solid var(--card-border);border-radius:999px;padding:10px 16px 10px 36px;color:var(--text);width:260px;outline:none;transition:border .2s}
+.search-box input:focus{border-color:var(--purple)}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);opacity:.5}
+
+/* Hero */
+.hero{padding:100px 0 60px;text-align:center;position:relative}
+.hero h1{font-size:clamp(36px,6vw,68px);line-height:1.05;margin:0 0 20px;font-weight:700}
+.gradient-text{background:linear-gradient(90deg,var(--purple),var(--blue),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:18px;max-width:640px;margin:0 auto 36px}
+.hero-search{display:flex;max-width:560px;margin:0 auto;background:rgba(255,255,255,0.05);border:1px solid var(--card-border);border-radius:999px;padding:6px;backdrop-filter:blur(12px)}
+.hero-search input{flex:1;background:transparent;border:0;color:var(--text);padding:12px 18px;outline:none}
+.hero-search button{border:0;border-radius:999px;padding:12px 22px;background:linear-gradient(135deg,var(--purple),var(--blue));color:white;font-weight:600;cursor:pointer;transform:translateZ(0);transition:transform .15s}
+.hero-search button:hover{transform:scale(1.02)}
+
+/* Cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr} .nav{display:none} .search-box{display:none}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}}
+.tool-card{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:var(--radius);
+  padding:24px;
+  backdrop-filter:blur(16px);
+  transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s;
+  will-change:transform;
+  opacity:0;transform:translateY(16px);
+  animation:fadeUp .6s forwards;
+}
+.tool-card:hover{transform:translateY(-6px) scale(1.01);border-color:var(--card-hover-border);box-shadow:0 12px 40px rgba(124,58,237,0.15),0 0 0 1px rgba(124,58,237,0.2) inset}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.tool-card .icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(59,130,246,0.15));border:1px solid rgba(255,255,255,0.08);margin-bottom:16px}
+.tool-card h3{margin:0 0 8px;font-size:18px}
+.tool-card p{margin:0 0 16px;color:var(--muted);font-size:14px}
+.tool-card .cta{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--text)}
+.tool-card .cta svg{transition:transform .2s}
+.tool-card:hover .cta svg{transform:translateX(4px)}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:64px 0;border-top:1px solid var(--card-border);border-bottom:1px solid var(--card-border);margin:80px 0}
+.stat{text-align:center}
+.stat b{font-size:36px;display:block;font-family:'Space Grotesk'}
+.stat span{color:var(--muted);font-size:14px}
+@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}}
+
+/* Features */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:60px 0}
+.feature{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px}
+.feature h4{margin:12px 0 6px}
+
+/* FAQ */
+.faq{max-width:800px;margin:60px auto}
+.faq-item{border:1px solid var(--card-border);border-radius:12px;margin-bottom:12px;background:var(--card);overflow:hidden}
+.faq-q{padding:18px 20px;display:flex;justify-content:space-between;cursor:pointer;font-weight:600}
+.faq-a{padding:0 20px 18px;color:var(--muted);font-size:14px;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* Tool page layout */
+.tool-layout{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;margin:40px 0}
+@media(max-width:900px){.tool-layout{grid-template-columns:1fr}}
+.upload-zone{
+  border:1.5px dashed var(--card-border);
+  border-radius:var(--radius);
+  padding:36px;
+  text-align:center;
+  background:var(--card);
+  transition:border-color .2s, transform .2s;
+}
+.upload-zone.dragover{border-color:var(--purple);transform:scale(1.01)}
+.upload-zone svg{animation:bounce 1.8s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.btn-primary{background:linear-gradient(135deg,var(--purple),var(--blue));color:white;border:0;border-radius:999px;padding:12px 22px;font-weight:600;cursor:pointer;transition:transform .15s, box-shadow .2s;will-change:transform}
+.btn-primary:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(124,58,237,0.35)}
+.preview-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:20px;backdrop-filter:blur(12px)}
+.select-row{display:flex;gap:12px;margin:16px 0;flex-wrap:wrap}
+.select-row select,.select-row label{background:rgba(255,255,255,0.06);border:1px solid var(--card-border);color:var(--text);border-radius:10px;padding:10px 12px}
+
+/* Footer */
+.footer{border-top:1px solid var(--card-border);padding:40px 0;margin-top:80px;color:var(--muted);font-size:14px}
+.footer-grid{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.magnetic{will-change:transform;transition:transform .15s}
+
+.chat-preview{background:#111113;border-radius:16px;padding:20px;max-height:520px;overflow:auto;border:1px solid rgba(255,255,255,0.08)}
+.chat-preview.light{background:#fafafb;color:#111}
+.bubble{max-width:80%;padding:12px 14px;border-radius:18px;margin:8px 0;font-size:14px;line-height:1.5}
+.bubble.user{background:linear-gradient(135deg,#7c3aed,#3b82f6);color:white;margin-left:auto;border-bottom-right-radius:6px}
+.bubble.assistant{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.08);border-bottom-left-radius:6px}
+.chat-preview.light .bubble.assistant{background:#fff;border:1px solid #e4e4e7;color:#111}
+.meta{font-size:11px;opacity:0.6;margin-bottom:4px}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:18px;text-align:center}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+@media(max-width:800px){.charts{grid-template-columns:1fr}}
+section.tool-section{padding:80px 0;border-top:1px solid rgba(255,255,255,0.08);scroll-margin-top:80px}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {"@type":"WebSite","name":"Its Tousif Tools","url":"https://itstousiftools.github.io/","description":"Powerful media tools built for speed","publisher":{"@type":"Organization","name":"Its Tousif Tools"}},
+    {"@type":"SoftwareApplication","name":"Image to 300 DPI Converter","description":"Convert any image to 300 DPI for print-ready quality","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+    {"@type":"SoftwareApplication","name":"ChatGPT Chat to PDF","description":"Export ChatGPT chats as beautiful PDFs","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},
+    {"@type":"SoftwareApplication","name":"WhatsApp Chat Analyzer","description":"Analyze WhatsApp chats with insights and charts","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  ]
+}
+</script>
+</head>
+<body>
+<div class="bg-blobs"><div class="blob purple"></div><div class="blob blue"></div><div class="blob cyan"></div></div>
+<header class="header"><div class="container header-inner"><a class="logo" href="#home"><span class="logo-dot"></span> Its Tousif Tools</a><nav class="nav"><a href="#home">Home</a><a href="#dpi">300 DPI</a><a href="#chatpdf">Chat to PDF</a><a href="#whatsapp">WhatsApp</a><a class="btn magnetic" href="#dpi">Use Tools</a></nav></div></header>
+
+<section id="home" class="hero container">
+<h1>Powerful Media Tools,<br><span class="gradient-text">Built for Speed</span></h1>
+<p>Convert, export and analyze your media with studio-grade precision. All 3 premium tools now in ONE page - fast, private, free forever.</p>
+<div class="hero-search"><input id="toolSearch" placeholder="Search tools (e.g. DPI, PDF, WhatsApp)"><button class="magnetic">Search</button></div>
+<div id="tools" class="grid">
+<a href="#dpi" class="tool-card"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></div><h3>Image to 300 DPI</h3><p>Convert any image to print-ready 300 DPI.</p><span class="cta">Use Tool →</span></a>
+<a href="#chatpdf" class="tool-card"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>Chat to PDF</h3><p>Export ChatGPT conversations into beautiful PDFs.</p><span class="cta">Use Tool →</span></a>
+<a href="#whatsapp" class="tool-card"><div class="icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><h3>WhatsApp Analyzer</h3><p>Get deep insights from your WhatsApp _chat.txt.</p><span class="cta">Use Tool →</span></a>
+</div>
+</section>
+
+<section class="container stats"><div class="stat"><b data-count="10000">0</b><span>Active Users</span></div><div class="stat"><b data-count="50000">0</b><span>Files Processed</span></div><div class="stat"><b data-count="99">0</b><span>Uptime %</span></div><div class="stat"><b data-count="3">0</b><span>Premium Tools</span></div></section>
+
+<section id="dpi" class="tool-section container"><h2>Image to <span class="gradient-text">300 DPI</span> Converter</h2><p style="color:#94a3b8">Make any image print-ready with true 300 DPI metadata.</p><div class="tool-layout"><div><div class="upload-zone" id="dropZone1"><p><b>Drag & drop image</b> or click to browse</p><input type="file" id="fileInput1" accept="image/*" hidden></div><div class="select-row"><select id="dpiSelect"><option value="72">72 DPI</option><option value="150">150 DPI</option><option value="300" selected>300 DPI (Print)</option></select><select id="formatSelect"><option value="jpeg">JPG</option><option value="png">PNG</option></select><button id="convertBtn" class="btn-primary magnetic">Convert to 300 DPI</button></div><div id="fileInfo" style="color:#94a3b8;font-size:13px;margin-top:8px"></div></div><div class="preview-card"><h3>Preview & Download</h3><canvas id="previewCanvas" style="width:100%;max-height:320px;object-fit:contain;background:rgba(0,0,0,0.3);border-radius:12px;margin:12px 0"></canvas><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px;color:#94a3b8"><div>Original: <span id="origInfo">-</span></div><div>New: <span id="newInfo">-</span></div><div>Size: <span id="sizeInfo">-</span></div><div>DPI: <span id="dpiInfo">-</span></div></div><button id="downloadBtn" class="btn-primary magnetic" style="width:100%;margin-top:16px;display:none">Download Print-Ready Image</button></div></div></section>
+
+<section id="chatpdf" class="tool-section container"><h2>ChatGPT Chat to <span class="gradient-text">Beautiful PDF</span></h2><p style="color:#94a3b8">Export your ChatGPT conversations into polished PDFs.</p><div class="tool-layout"><div><div class="upload-zone" id="dropZone2"><p><b>Upload ChatGPT JSON or HTML</b></p><input type="file" id="fileInput2" accept=".json,.html,.txt" hidden></div><textarea id="pasteArea" placeholder="Paste ChatGPT exported text or JSON here..." style="width:100%;margin-top:12px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;color:white;min-height:120px"></textarea><div class="select-row"><select id="themeSelect"><option value="dark">Dark Chat Theme</option><option value="light">Light Theme</option></select><label><input type="checkbox" id="timeCheck" checked> Include timestamps</label><button id="genBtn" class="btn-primary magnetic">Generate PDF</button></div></div><div class="preview-card"><h3>Live Preview</h3><div id="chatPreview" class="chat-preview"><p style="color:#94a3b8">Preview will appear here...</p></div><button id="downloadBtn2" class="btn-primary magnetic" style="width:100%;margin-top:12px;display:none">Download PDF</button></div></div></section>
+
+<section id="whatsapp" class="tool-section container"><h2>WhatsApp Chat <span class="gradient-text">Analyzer</span></h2><p style="color:#94a3b8">Upload your exported _chat.txt and unlock insights. Your files are processed securely in your browser and never uploaded.</p><div class="tool-layout"><div><div class="upload-zone" id="dropZone3"><p><b>Upload WhatsApp _chat.txt</b></p><input type="file" id="fileInput3" accept=".txt" hidden></div><div id="summary" style="margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px"></div></div><div class="preview-card"><h3>Dashboard</h3><div id="emptyState" style="color:#94a3b8;text-align:center;padding:40px 0">Upload a file to see insights</div><div id="dashboard" style="display:none"><div class="charts"><canvas id="dayChart"></canvas><canvas id="personChart"></canvas></div><div style="margin-top:16px"><canvas id="timeChart"></canvas></div></div></div></div></section>
+
+<footer class="footer"><div class="container footer-grid"><span>© 2026 Its Tousif Tools</span><span><a href="#home">Home</a></span></div></footer>
+
+<script>
+
+// Its Tousif Tools - Premium Interactions
+document.addEventListener('DOMContentLoaded', ()=>{
+  // Stagger cards
+  document.querySelectorAll('.tool-card').forEach((el,i)=>{
+    el.style.animationDelay = (i*0.1)+'s';
+  });
+  // Parallax blobs
+  const blobs = document.querySelectorAll('.blob');
+  let ticking=false;
+  window.addEventListener('scroll',()=>{
+    if(!ticking){
+      requestAnimationFrame(()=>{
+        const y = window.scrollY;
+        blobs.forEach((b,idx)=>{
+          const speed = 0.15 + idx*0.05;
+          b.style.transform = `translate3d(0, ${y*speed*0.2}px, 0) scale(${1 + y*0.0001})`;
+        });
+        ticking=false;
+      });
+      ticking=true;
+    }
+  },{passive:true});
+
+  // Animated counters
+  const counters = document.querySelectorAll('[data-count]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        const target=+el.dataset.count;
+        let cur=0;
+        const step=()=>{cur+=target/60; if(cur<target){el.textContent=Math.floor(cur).toLocaleString()+'+';requestAnimationFrame(step);} else el.textContent=target.toLocaleString()+'+';};
+        step();
+        io.unobserve(el);
+      }
+    });
+  },{threshold:0.6});
+  counters.forEach(c=>io.observe(c));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+
+  // Search filter (home)
+  const searchInput = document.getElementById('toolSearch');
+  if(searchInput){
+    searchInput.addEventListener('input',()=>{
+      const v=searchInput.value.toLowerCase();
+      document.querySelectorAll('.tool-card').forEach(card=>{
+        const text=card.textContent.toLowerCase();
+        card.style.display = text.includes(v) ? '' : 'none';
+      });
+    });
+  }
+
+  // Magnetic buttons
+  document.querySelectorAll('.magnetic').forEach(btn=>{
+    btn.addEventListener('mousemove',(e)=>{
+      const rect=btn.getBoundingClientRect();
+      const x=e.clientX-rect.left-rect.width/2;
+      const y=e.clientY-rect.top-rect.height/2;
+      btn.style.transform=`translate(${x*0.12}px, ${y*0.25}px) scale(1.02)`;
+    });
+    btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0) scale(1)';});
+  });
+
+  // Drag & Drop generic
+  document.querySelectorAll('.upload-zone').forEach(zone=>{
+    ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.add('dragover');}));
+    ['dragleave','drop'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove('dragover');}));
+  });
+});
+
+</script>
+
+<script>
+// DPI Tool
+const dropZone1=document.getElementById('dropZone1');const fileInput1=document.getElementById('fileInput1');const canvas1=document.getElementById('previewCanvas');const ctx1=canvas1.getContext('2d');let imgObj=null,fileName='converted-300dpi',originalWidth=0,originalHeight=0;
+dropZone1.addEventListener('click',()=>fileInput1.click());
+dropZone1.addEventListener('dragover',e=>{e.preventDefault();dropZone1.classList.add('dragover');});
+dropZone1.addEventListener('dragleave',()=>dropZone1.classList.remove('dragover'));
+dropZone1.addEventListener('drop',e=>{e.preventDefault();dropZone1.classList.remove('dragover'); const f=e.dataTransfer.files[0]; if(f) handleFile1(f);});
+fileInput1.addEventListener('change',e=>handleFile1(e.target.files[0]));
+function handleFile1(file){if(!file)return;fileName=file.name.split('.')[0];const url=URL.createObjectURL(file);const img=new Image();img.onload=()=>{originalWidth=img.width;originalHeight=img.height;canvas1.width=img.width;canvas1.height=img.height;ctx1.drawImage(img,0,0);imgObj=img;document.getElementById('origInfo').textContent=img.width+'x'+img.height;document.getElementById('fileInfo').textContent='Loaded '+file.name+' - '+(file.size/1024).toFixed(1)+' KB';document.getElementById('sizeInfo').textContent=(file.size/1024).toFixed(1)+' KB';};img.src=url;}
+document.getElementById('convertBtn').addEventListener('click',()=>{if(!imgObj)return alert('Upload an image first');const targetDpi=parseInt(document.getElementById('dpiSelect').value);const format=document.getElementById('formatSelect').value;const scale=targetDpi/72;const newW=Math.round(originalWidth*scale);const newH=Math.round(originalHeight*scale);const tmp=document.createElement('canvas');tmp.width=newW;tmp.height=newH;const tCtx=tmp.getContext('2d');tCtx.imageSmoothingQuality='high';tCtx.drawImage(imgObj,0,0,newW,newH);canvas1.width=newW;canvas1.height=newH;ctx1.imageSmoothingQuality='high';ctx1.drawImage(tmp,0,0);document.getElementById('newInfo').textContent=newW+'x'+newH;document.getElementById('dpiInfo').textContent=targetDpi+' DPI';document.getElementById('sizeInfo').textContent='~'+((newW*newH*4)/1024).toFixed(0)+' KB (est)';canvas1.dataset.format=format;canvas1.dataset.dpi=targetDpi;document.getElementById('downloadBtn').style.display='block';canvas1._tmpCanvas=tmp;});
+document.getElementById('downloadBtn').addEventListener('click',()=>{const format=canvas1.dataset.format||'jpeg';const dpi=parseInt(canvas1.dataset.dpi)||300;const srcCanvas=canvas1._tmpCanvas||canvas1;let mime=format==='png'?'image/png':'image/jpeg';let dataUrl=srcCanvas.toDataURL(mime,0.92);const a=document.createElement('a');a.href=dataUrl;a.download=fileName+'-'+dpi+'dpi.'+(format==='png'?'png':'jpg');a.click();});
+
+// Chat to PDF
+let messages=[];const dropZone2=document.getElementById('dropZone2');const fileInput2=document.getElementById('fileInput2');const pasteArea=document.getElementById('pasteArea');const chatPreview=document.getElementById('chatPreview');const themeSelect=document.getElementById('themeSelect');const timeCheck=document.getElementById('timeCheck');
+dropZone2.addEventListener('click',()=>fileInput2.click());
+fileInput2.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>parseChat(r.result);r.readAsText(f);});
+pasteArea.addEventListener('input',()=>parseChat(pasteArea.value));
+function parseChat(text){try{const json=JSON.parse(text);if(Array.isArray(json))messages=json.map(m=>({role:m.role||'user',content:m.content||m.text||'',time:m.create_time||''}));else if(json.mapping){messages=Object.values(json.mapping).filter(n=>n.message).map(n=>{const msg=n.message;return{role:msg.author?.role||'user',content:msg.content?.parts?.join('\n')||'',time:msg.create_time||''};}).filter(m=>m.content);}else{messages=[{role:'user',content:text.slice(0,5000),time:new Date().toISOString()}];}}catch(e){const parts=text.split(/\n(?=User:|Assistant:|ChatGPT:)/g);messages=parts.map(p=>{const isUser=/^User:/i.test(p);return{role:isUser?'user':'assistant',content:p.replace(/^(User|Assistant|ChatGPT):/i,'').trim(),time:''};}).filter(m=>m.content);if(messages.length===0)messages=[{role:'user',content:text,time:''}];}renderChat();}
+function renderChat(){const theme=themeSelect.value;chatPreview.className='chat-preview '+theme;chatPreview.innerHTML=messages.map(m=>`<div><div class="meta">${timeCheck.checked&&m.time?new Date(m.time*1000||m.time).toLocaleString()+' • '+m.role:m.role}</div><div class="bubble ${m.role==='user'?'user':'assistant'}">${escapeHtml(m.content)}</div></div>`).join('');document.getElementById('downloadBtn2').style.display='block';}
+function escapeHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
+themeSelect.addEventListener('change',renderChat);timeCheck.addEventListener('change',renderChat);
+document.getElementById('genBtn').addEventListener('click',()=>{if(pasteArea.value)parseChat(pasteArea.value);if(messages.length===0)return alert('Upload or paste chat first');renderChat();});
+document.getElementById('downloadBtn2').addEventListener('click',async()=>{const {jsPDF}=window.jspdf;const canvas=await html2canvas(chatPreview,{scale:2,backgroundColor:themeSelect.value==='light'?'#fafafb':'#111113'});const imgData=canvas.toDataURL('image/png');const pdf=new jsPDF('p','mm','a4');const imgProps=pdf.getImageProperties(imgData);const pdfWidth=pdf.internal.pageSize.getWidth();const pdfHeight=(imgProps.height*pdfWidth)/imgProps.width;let heightLeft=pdfHeight;let position=0;pdf.addImage(imgData,'PNG',0,position,pdfWidth,pdfHeight);heightLeft-=pdf.internal.pageSize.getHeight();while(heightLeft>0){position=heightLeft-pdfHeight;pdf.addPage();pdf.addImage(imgData,'PNG',0,position,pdfWidth,pdfHeight);heightLeft-=pdf.internal.pageSize.getHeight();}pdf.save('chatgpt-chat.pdf');});
+
+// WhatsApp Analyzer
+const dropZone3=document.getElementById('dropZone3');const fileInput3=document.getElementById('fileInput3');let dayChart,personChart,timeChart;
+dropZone3.addEventListener('click',()=>fileInput3.click());
+dropZone3.addEventListener('dragover',e=>{e.preventDefault();dropZone3.classList.add('dragover');});
+dropZone3.addEventListener('dragleave',()=>dropZone3.classList.remove('dragover'));
+dropZone3.addEventListener('drop',e=>{e.preventDefault();dropZone3.classList.remove('dragover');const f=e.dataTransfer.files[0];if(f){const r=new FileReader();r.onload=()=>analyzeWA(r.result);r.readAsText(f);}});
+fileInput3.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>analyzeWA(r.result);r.readAsText(f);});
+function analyzeWA(text){const lines=text.split('\n');const simpleRegex=/^(\d+\/\d+\/\d+,?\s[^\-]+)\s-\s([^:]+):/;let msgs=[];let cur=null;let mediaCount=0;lines.forEach(line=>{const m=line.match(simpleRegex);if(m){if(cur)msgs.push(cur);const dateStr=m[1];const sender=m[2].trim();const content=line.slice(m[0].length).trim();if(content.includes('<Media omitted>'))mediaCount++;cur={date:dateStr,sender,content,words:content.split(/\s+/).length};}else{if(cur)cur.content+=' '+line;}});if(cur)msgs.push(cur);const totalMessages=msgs.length;const totalWords=msgs.reduce((a,b)=>a+b.words,0);const senders={};const days={};const hours={};msgs.forEach(msg=>{senders[msg.sender]=(senders[msg.sender]||0)+1;const d=msg.date.split(',')[0];days[d]=(days[d]||0)+1;const hourMatch=msg.date.match(/(\d+):\d+/);if(hourMatch){const h=parseInt(hourMatch[1]);hours[h]=(hours[h]||0)+1;}});const summary=document.getElementById('summary');summary.innerHTML=`<div class="stat-card"><b>${totalMessages}</b><br><span style="color:#94a3b8;font-size:12px">Total Messages</span></div><div class="stat-card"><b>${totalWords}</b><br><span style="color:#94a3b8;font-size:12px">Total Words</span></div><div class="stat-card"><b>${mediaCount}</b><br><span style="color:#94a3b8;font-size:12px">Media Shared</span></div><div class="stat-card"><b>${Object.keys(senders).length}</b><br><span style="color:#94a3b8;font-size:12px">Participants</span></div>`;document.getElementById('emptyState').style.display='none';document.getElementById('dashboard').style.display='block';const dayLabels=Object.keys(days).slice(0,12);const dayValues=dayLabels.map(k=>days[k]);if(dayChart)dayChart.destroy();dayChart=new Chart(document.getElementById('dayChart'),{type:'bar',data:{labels:dayLabels,datasets:[{label:'Messages by Day',data:dayValues,backgroundColor:'rgba(124,58,237,0.7)',borderRadius:8}]},options:{responsive:true,animation:{duration:1200},plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#94a3b8'}},y:{grid:{color:'rgba(255,255,255,0.06)'},ticks:{color:'#94a3b8'}}}}});const pLabels=Object.keys(senders);const pValues=pLabels.map(k=>senders[k]);if(personChart)personChart.destroy();personChart=new Chart(document.getElementById('personChart'),{type:'doughnut',data:{labels:pLabels,datasets:[{data:pValues,backgroundColor:['#7c3aed','#3b82f6','#06b6d4','#a78bfa','#60a5fa']}]},options:{responsive:true,animation:{animateRotate:true,duration:1200},plugins:{legend:{labels:{color:'#cbd5e1'}}}}});const hourLabels=Array.from({length:24},(_,i)=>i+':00');const hourData=hourLabels.map((_,i)=>hours[i]||0);if(timeChart)timeChart.destroy();timeChart=new Chart(document.getElementById('timeChart'),{type:'line',data:{labels:hourLabels,datasets:[{label:'Activity by Hour',data:hourData,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,0.15)',tension:0.4,fill:true}]},options:{responsive:true,animation:{duration:1200},plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#94a3b8'}},y:{ticks:{color:'#94a3b8'}}}}});}
+</script>
+</body>
+</html>
