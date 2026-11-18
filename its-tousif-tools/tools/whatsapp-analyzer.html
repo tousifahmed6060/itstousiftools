@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WhatsApp Chat Analyzer - Get Chat Stats & Insights Free | Its Tousif Tools</title>
+<meta name="description" content="Analyze WhatsApp chats instantly. Get total messages, words, media count, most active day & person with beautiful charts. Private & free.">
+<meta name="keywords" content="whatsapp chat analyzer, whatsapp stats, chat insights, whatsapp analyzer online">
+<meta name="author" content="Its Tousif Tools">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://itstousiftools.github.io/tools/whatsapp-analyzer.html">
+<meta property="og:title" content="WhatsApp Chat Analyzer - Insights Free">
+<meta property="og:description" content="Get deep stats & charts from your WhatsApp chat export. Secure & private.">
+<meta property="og:image" content="https://itstousiftools.github.io/assets/og-image.png">
+<meta property="og:url" content="https://itstousiftools.github.io/tools/whatsapp-analyzer.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"WhatsApp Chat Analyzer","description":"Analyze WhatsApp chat exports with insights and charts","applicationCategory":"UtilitiesApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<style>.stat-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:18px;text-align:center} .charts{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px} @media(max-width:800px){.charts{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<div class="bg-blobs"><div class="blob purple"></div><div class="blob blue"></div><div class="blob cyan"></div></div>
+<header class="header"><div class="container header-inner"><a class="logo" href="../index.html"><span class="logo-dot"></span> Its Tousif Tools</a><nav class="nav"><a href="../index.html">Home</a><a href="./image-to-300-dpi.html">300 DPI</a><a href="./chat-to-pdf.html">Chat to PDF</a></nav></div></header>
+<main class="container">
+<h1 style="margin-top:48px">WhatsApp Chat <span class="gradient-text">Analyzer</span></h1>
+<p style="color:var(--muted)">Upload your exported _chat.txt and unlock beautiful insights. Your files are processed securely in your browser and never uploaded.</p>
+
+<div class="tool-layout">
+<div>
+<div class="upload-zone" id="dropZone"><div style="display:grid;place-items:center;margin-bottom:12px"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div><p><b>Upload WhatsApp _chat.txt</b></p><p style="font-size:12px;color:var(--muted)">Export from WhatsApp > Chat > Export Chat</p><input type="file" id="fileInput" accept=".txt" hidden></div>
+<div id="summary" style="margin-top:20px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px"></div>
+</div>
+<div class="preview-card">
+<h3>Dashboard</h3>
+<div id="emptyState" style="color:var(--muted);text-align:center;padding:40px 0">Upload a file to see insights</div>
+<div id="dashboard" style="display:none">
+<div class="charts"><canvas id="dayChart"></canvas><canvas id="personChart"></canvas></div>
+<div style="margin-top:16px"><canvas id="timeChart"></canvas></div>
+</div>
+</div>
+</div>
+
+<section style="margin-top:64px">
+<div style="background:rgba(124,58,237,0.08);border:1px solid rgba(124,58,237,0.2);border-radius:16px;padding:20px">
+<h4 style="margin:0 0 8px;display:flex;gap:8px;align-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Privacy Focused</h4>
+<p style="color:var(--muted);margin:0;font-size:14px">Your files are processed securely in your browser and never uploaded. We use pure client-side JavaScript for all analysis. No server, no storage, no tracking.</p>
+</div>
+<h2 style="margin-top:32px">How WhatsApp Export Works</h2>
+<p style="color:var(--muted)">Open WhatsApp > Open Chat > Tap ••• > More > Export Chat > Without Media or With Media > Share file and upload here.</p>
+</div>
+</section>
+</main>
+<footer class="footer"><div class="container footer-grid"><span>© 2026 Its Tousif Tools</span></div></footer>
+<script src="../assets/script.js"></script>
+<script>
+const dropZone=document.getElementById('dropZone');
+const fileInput=document.getElementById('fileInput');
+let dayChart, personChart, timeChart;
+
+dropZone.addEventListener('click',()=>fileInput.click());
+dropZone.addEventListener('drop',e=>{const f=e.dataTransfer.files[0]; if(f) handleFile(f);});
+fileInput.addEventListener('change',e=>handleFile(e.target.files[0]));
+
+function handleFile(file){
+  const reader=new FileReader();
+  reader.onload=()=>analyze(reader.result);
+  reader.readAsText(file);
+}
+
+function analyze(text){
+  const lines=text.split('\n');
+  // Regex: 12/31/23, 11:59 PM - Name: Message  OR  [31/12/23, 11:59:00] Name: 
+  const regex = /^(\d{1,2}\/\d{1,2}\/\d{2,4},?\s?\d{1,2}:\d{2}(?:\s?[AP]M)?|\[\d+\/\d+\/\d+,?\s\d+:\d+.*?)\s-\s(.*?):\s(.*)$|^(\d{1,2}\/\d{1,2}\/\d{2,4},?\s\d{1,2}:\d{2}.*?)\s-\s(.*)$/;
+  const simpleRegex = /^(\d+\/\d+\/\d+,?\s[^\-]+)\s-\s([^:]+):/;
+  let messages=[];
+  let current=null;
+  let mediaCount=0;
+  lines.forEach(line=>{
+    const m=line.match(simpleRegex);
+    if(m){
+      if(current) messages.push(current);
+      const dateStr=m[1];
+      const sender=m[2].trim();
+      const content=line.slice(m[0].length).trim();
+      if(content.includes('<Media omitted>')||content.includes('image omitted')||content.includes('video omitted')||content.includes('sticker omitted')) mediaCount++;
+      current={date:dateStr, sender, content, words: content.split(/\s+/).length};
+    } else {
+      if(current) current.content+=' '+line;
+    }
+  });
+  if(current) messages.push(current);
+
+  const totalMessages=messages.length;
+  const totalWords=messages.reduce((a,b)=>a+b.words,0);
+  const senders={};
+  const days={};
+  const hours={};
+  messages.forEach(msg=>{
+    senders[msg.sender]=(senders[msg.sender]||0)+1;
+    // Extract date for day grouping
+    const d = msg.date.split(',')[0];
+    days[d]=(days[d]||0)+1;
+    const hourMatch = msg.date.match(/(\d+):\d+/);
+    if(hourMatch){ const h=parseInt(hourMatch[1]); hours[h]=(hours[h]||0)+1; }
+  });
+
+  // Render summary
+  const summary=document.getElementById('summary');
+  summary.innerHTML=`
+    <div class="stat-card"><b>${totalMessages}</b><br><span style="color:var(--muted);font-size:12px">Total Messages</span></div>
+    <div class="stat-card"><b>${totalWords}</b><br><span style="color:var(--muted);font-size:12px">Total Words</span></div>
+    <div class="stat-card"><b>${mediaCount}</b><br><span style="color:var(--muted);font-size:12px">Media Shared</span></div>
+    <div class="stat-card"><b>${Object.keys(senders).length}</b><br><span style="color:var(--muted);font-size:12px">Participants</span></div>
+  `;
+
+  document.getElementById('emptyState').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+
+  // Day chart
+  const dayLabels=Object.keys(days).slice(0,12);
+  const dayValues=dayLabels.map(k=>days[k]);
+  if(dayChart) dayChart.destroy();
+  dayChart=new Chart(document.getElementById('dayChart'),{
+    type:'bar',
+    data:{labels:dayLabels, datasets:[{label:'Messages by Day', data:dayValues, backgroundColor:'rgba(124,58,237,0.7)', borderRadius:8}]},
+    options:{responsive:true, animation:{duration:1200}, plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}, ticks:{color:'#94a3b8'}}, y:{grid:{color:'rgba(255,255,255,0.06)'}, ticks:{color:'#94a3b8'}} } }
+  });
+
+  // Person pie
+  const pLabels=Object.keys(senders);
+  const pValues=pLabels.map(k=>senders[k]);
+  if(personChart) personChart.destroy();
+  personChart=new Chart(document.getElementById('personChart'),{
+    type:'doughnut',
+    data:{labels:pLabels, datasets:[{data:pValues, backgroundColor:['#7c3aed','#3b82f6','#06b6d4','#a78bfa','#60a5fa']}]},
+    options:{responsive:true, animation:{animateRotate:true, duration:1200}, plugins:{legend:{labels:{color:'#cbd5e1'}}} }
+  });
+
+  // Hour chart
+  const hourLabels=Array.from({length:24},(_,i)=>i+':00');
+  const hourData=hourLabels.map((_,i)=>hours[i]||0);
+  if(timeChart) timeChart.destroy();
+  timeChart=new Chart(document.getElementById('timeChart'),{
+    type:'line',
+    data:{labels:hourLabels, datasets:[{label:'Activity by Hour', data:hourData, borderColor:'#7c3aed', backgroundColor:'rgba(124,58,237,0.15)', tension:0.4, fill:true}]},
+    options:{responsive:true, animation:{duration:1200}, plugins:{legend:{display:false}}, scales:{x:{ticks:{color:'#94a3b8'}}, y:{ticks:{color:'#94a3b8'}} } }
+  });
+}
+</script>
+</body>
+</html>
